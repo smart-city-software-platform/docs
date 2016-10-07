@@ -5,10 +5,10 @@ provided by the Smart City Software Platform.
 
 ## Summary
 
-* (Overview)[]
-* (Design constraints and guidelines)[]
-* (Security)[]
-* (Roadmap)[]
+* [Overview](#overview)
+* [Design constraints and guidelines](#design-constraints-and-guidelines)
+* [Security](#security)
+* [Roadmap](#roadmap)
 
 ## Overview
 
@@ -22,4 +22,10 @@ services. Thus, the platform is based on a scalable, distributed
 
 Here is the platform's services in layers:
 
-![Platform's services layers][../images/layer_overview.png]
+![Platform's services layers](../images/layer_overview.png)
+
+## Design constraints and guidelines
+
+## Security
+
+## Roadmap
