@@ -25,12 +25,12 @@ Among others, the platform provides the following features:
 
 You can find the detailed project documentation in these links:
 
-* [Architecture]()
-* [API documentation]()
-* [Microservices documentation]()
-* [Deployment]()
-* [Roadmap]()
-* [Contributing guidelines]()
+* [Architecture](architecture/Architecture.md)
+* [API documentation](api/API.md)
+* [Microservices documentation](microservices/Microservices.md)
+* [Deployment](deployment/Deployment.md)
+* [Roadmap](roadmap/Roadmap.md)
+* [Contributing guidelines](contributing/Contributing.md)
 
 
 
