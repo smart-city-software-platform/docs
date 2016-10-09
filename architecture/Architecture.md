@@ -24,9 +24,11 @@ The following figure presents the platform's main services and how they
 communicate:
 
 ![Platform's services architecture](../images/services_overview.png)
+> Icons from [Flaticon](http://www.flaticon.com/packs/urban-3)
 
 ## Design constraints and guidelines
 
 ## Security
 
 ## Roadmap
+
