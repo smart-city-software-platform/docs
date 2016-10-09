@@ -43,6 +43,17 @@ services provided by the platform:
 > Icons from [Flaticon](http://www.flaticon.com/packs/urban-3) and by 
 [Madebyoliver](http://www.flaticon.com/authors/madebyoliver).
 
+Data Collector, Resource Discoverer and Actuator Controller services can be
+used by application developers to access city's resources, as denoted by
+**A**, **B** and **C** labeled arrows. The integration of new physical 
+resources may use the IoT Integration Services APIs. However, the communication
+represented by the **D** arrow must only be used for integration of new 
+resources to the platform, not for end-user application development.
+
+Next section describes in more detail the platform's **microservices
+architecture**, designed to provide the required features to support Smart
+Cities.
+
 ## Communication between services
 
 In order to properly provide an unified technological infrastructure to 
@@ -99,12 +110,17 @@ uses the *Resource Cataloguer* REST API to get the available resources and
 their meta-data. It also uses the *Data Collector* REST API to get the last
 data from specific resources with sensor capabilities.
 
-
 ## Deployment view
+
+> Comming soon
 
 ## Design constraints and guidelines
 
+> Comming soon
+
 ## Security
+
+> Comming soon
 
 ## Roadmap
 
