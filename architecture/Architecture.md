@@ -7,21 +7,46 @@ provided by the Smart City Software Platform.
 
 * [Overview](#overview)
 * [Communication between services](#communication-between-services)
-  * [Service discovery](#service-discovery)
-  * [Deployment view](#deployment-view)
-  * [API Gateway](#api-gateway)
+* [Deployment view](#deployment-view)
 * [Design constraints and guidelines](#design-constraints-and-guidelines)
 * [Security](#security)
 * [Roadmap](#roadmap)
+  * [Service discovery](#service-discovery)
+  * [Messaging](#messaging)
+  * [API Gateway](#api-gateway)
 
 ## Overview
 
-## Communication between services
 
 The project aims to provide high-level services to support 
 novel applications that interact with city's resources such as bus,
-street cameras, environmental sensors, and public open data. 
-In order to properly provide such services to city-scale, the platform
+street cameras, environmental sensors, and public open data. For this purpose,
+it works as an integrated, scalable software infrastructure gathering
+three key-enabling technologies: IoT, BigData and Cloud Computing. Such
+infrastructure must support cross-domain applications rather than 
+technological silos by sharing services, APIs, data, and standards.
+
+There are two kind of services provided by the platform:
+
+* Front-end services: native platform services with graphical interfaces.
+Such services provide features to visualize data from city resources as well
+as meta-data for administrative purpose.
+* Development services: native platform services accessible through high-level
+APIs to support Smart Cities application, new services, and other development
+tools. While most services are based on REST protocol, we plan to add new
+platform services supported by other protocols soon, such as Websocket.
+
+The following diagram presents a summarized overview of the development 
+services provided by the platform:
+
+![Platform development services](../images/platform_overview.png)
+> Icons from [Flaticon](http://www.flaticon.com/packs/urban-3) and by 
+[Madebyoliver](http://www.flaticon.com/authors/madebyoliver).
+
+## Communication between services
+
+In order to properly provide an unified technological infrastructure to 
+city-scale services, the platform
 needs to integrate a large number of heterogeneous physical devices and 
 services. Thus, the platform is based on a scalable, distributed 
 **microservices** architecture.
@@ -75,6 +100,14 @@ their meta-data. It also uses the *Data Collector* REST API to get the last
 data from specific resources with sensor capabilities.
 
 
+## Deployment view
+
+## Design constraints and guidelines
+
+## Security
+
+## Roadmap
+
 ### Service discovery
 
 Currently, the link between platform's services is configured through 
@@ -109,12 +142,3 @@ has not been adopted yet. There are some open source options:
 * [Traefik](http://traefik.io/)
 * [Tyk](https://tyk.io/)
 * [Zuul by Netflix](https://github.com/Netflix/zuul)
-
-## Deployment view
-
-## Design constraints and guidelines
-
-## Security
-
-## Roadmap
-
