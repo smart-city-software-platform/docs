@@ -6,11 +6,12 @@ provided by the Smart City Software Platform.
 ## Summary
 
 * [Overview](#overview)
-* [Communication between services](#communication-between-services)
+* [Microservices view](#microservices-view)
 * [Deployment view](#deployment-view)
 * [Design constraints and guidelines](#design-constraints-and-guidelines)
 * [Security](#security)
 * [Roadmap](#roadmap)
+  * [API](#api)
   * [Service discovery](#service-discovery)
   * [Messaging](#messaging)
   * [API Gateway](#api-gateway)
@@ -54,13 +55,16 @@ Next section describes in more detail the platform's **microservices
 architecture**, designed to provide the required features to support Smart
 Cities.
 
-## Communication between services
+## Microservices view
 
 In order to properly provide an unified technological infrastructure to 
 city-scale services, the platform
 needs to integrate a large number of heterogeneous physical devices and 
 services. Thus, the platform is based on a scalable, distributed 
 **microservices** architecture.
+To see the detailed relation of existing 
+microservices, check the [Microservices
+documentation page](../microservices/Microservices.md)
 
 The following figure presents the platform's main services and how they
 communicate:
@@ -123,6 +127,21 @@ data from specific resources with sensor capabilities.
 > Comming soon
 
 ## Roadmap
+
+### API
+
+The following features must be covered in future implementations:
+
+* Automatic documentation based on code
+  * [API Blueprint](https://apiblueprint.org/)
+  * [Apidoc](https://github.com/mbryzek/apidoc)
+  * [RAML](http://raml.org/)
+  * [Swagger](http://swagger.io/)
+* Pagination
+* Versioning
+* Support query language with [GraphQL](http://graphql.org/)
+* Support linked objects to resource composition with 
+[JSON-LD](http://json-ld.org/)
 
 ### Service discovery
 
