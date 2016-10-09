@@ -20,9 +20,10 @@ needs to integrate a large number of heterogeneous physical devices and
 services. Thus, the platform is based on a scalable, distributed 
 **microservices** architecture.
 
-Here is the platform's services in layers:
+The following figure presents the platform's main services and how they
+communicate:
 
-![Platform's services layers](../images/layer_overview.png)
+![Platform's services architecture](../images/services_overview.png)
 
 ## Design constraints and guidelines
 
