@@ -6,11 +6,17 @@ provided by the Smart City Software Platform.
 ## Summary
 
 * [Overview](#overview)
+* [Communication between services](#communication-between-services)
+  * [Service discovery](#service-discovery)
+  * [Deployment view](#deployment-view)
+  * [API Gateway](#api-gateway)
 * [Design constraints and guidelines](#design-constraints-and-guidelines)
 * [Security](#security)
 * [Roadmap](#roadmap)
 
 ## Overview
+
+## Communication between services
 
 The project aims to provide high-level services to support 
 novel applications that interact with city's resources such as bus,
@@ -69,6 +75,42 @@ their meta-data. It also uses the *Data Collector* REST API to get the last
 data from specific resources with sensor capabilities.
 
 
+### Service discovery
+
+Currently, the link between platform's services is configured through 
+statically config files. However, we plan to integrate a service discovery
+system to support dynamic service discovery. These are some options:
+
+* [Eureka by Netflix](https://github.com/Netflix/eureka)
+* [ETCD by CoreOS](https://github.com/coreos/etcd)
+* [SmartStack by Airbnb](http://nerds.airbnb.com/smartstack-service-discovery-cloud/)
+* [NSQ](http://nsq.io/)
+* [SERF by HashiCorp](https://www.serf.io/)
+* [SkyDNS](https://github.com/skynetservices/skydns)
+
+
+### Messaging
+
+Some of the synchronous communication between services may be redesigned to be
+support asynchronous messaging. These are some open source options:
+
+* [Mist](https://github.com/nanopack/mist)
+* [Apache Kafka](http://kafka.apache.org/)
+* [RabbitMQ](https://www.rabbitmq.com/)
+* [Mosquitto by Eclipse](https://mosquitto.org/)
+
+### API Gateway
+
+The [API Gateway design pattern](http://microservices.io/patterns/apigateway.html) 
+has not been adopted yet. There are some open source options:
+
+* [Kong](https://getkong.org/)
+* [Skipper](https://github.com/zalando/skipper)
+* [Traefik](http://traefik.io/)
+* [Tyk](https://tyk.io/)
+* [Zuul by Netflix](https://github.com/Netflix/zuul)
+
+## Deployment view
 
 ## Design constraints and guidelines
 
