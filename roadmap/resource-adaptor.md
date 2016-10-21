@@ -1,24 +1,48 @@
 # Roadmap - Resource Adaptor
 
-TODO: TRADUZIR
+This document describes a design roadmap for Resource Adaptor. The proposed
+design modifies the purpose of a Resource Adaptor so that it behaves as a proxy
+for physical devices and external services. This conceptual change may also
+affect other microservices, such as Data Collector. Here are the consequences
+of this design:
 
-## Design Roadmap
+* **Decoupling:** Any code that manages a specific device or external service
+will not be coupled to Resource Adaptor codebase anymore
+* **Proxy:** As a proxy, Resource Adaptor can provide its services through
+different protocols (i.e.: HTTP REST, CoAP, MQTT)
+* **Resource registering:** a Resource Adaptor must provide a service to 
+allow city's resources to register in the platform
+* **Resource authentication:** Any resource must authenticate to become 
+available in the platform. The Resource Adaptor must provide the necessary
+services to enable this authentication.
+* **Resource update:** A resource must be able to update its meta-data and
+attributes through the Resource Adaptor API
+* **Data collection:** The Data Collector won't keep polling Resource Adaptor 
+for new sensor data anymore. Instead, Data Collector must provide an API to
+post new sensor data, whether they are generated periodically or by events.
+* **Notify actuators:** A Resource Adaptor must provide an easy-to-use 
+publish/subscribe service so that resource with actuator capabilities can
+receive notifications whenever a new actuator request is created in the 
+platform
+* **Data storing:** A Resource Adaptor will no longer provide tradditional
+database-based persistence. Instead, it may be as thinner as possible so that
+it can manage resources requests to send and receive data
+* **Development toolkit:** Specific programming languages libraries must be
+developed to wrap Resource Adaptor service details, such as protocols and 
+messages.
+
+The following figure highlight the main decisions of the proposal design.
 
 ![ResourceAdaptor](../images/resource_adaptor_roadmap.png)
 
-* Separar Resource Adaptor do código dos recursos
- * Implementar API de sensores
+## Definitions
 
+### Resource Model
 
-## Definition
+Each resource is composed by general Meta-data (i.e.: type, latitude, 
+longitude), Capabilities (behavior), and by specific information data.
 
-O Resource Adaptor é um serviço que interage com os dispositivos físicos por meio de uma API REST (Por enquanto). A ideia é termos bibliotecas em diferentes linguagens de programação que facilite a comunicação dos códigos dos dispositivos com o Resource Adaptor, semelhante ao que o RAILS faz com a comunicação dos banco de dados (Postgresql), oferecendo uma API de alto nível. Essa API vai contemplar:
-
-(ESCREVER AQUI)
-
-Cada recurso é composto por metadados gerais (Tipo, latitude e longitude), comportamentos (Capacidades) e por metadados específicos (Metadata)
-
-## Metadata
+### Metadata
 
 * Type
 * Description
@@ -26,38 +50,37 @@ Cada recurso é composto por metadados gerais (Tipo, latitude e longitude), comp
 * Lat
 * Lon
 
-## Types Capabilities
+### Types of Capabilities
 
-Capacidades são funções que um recurso oferece, caracterizando o comportamento de um recurso. Essas capacidades podem ser dos seguintes tipos:
+Capabilities are functional part of a resource, defining resource's behavior.
+These capabilities belong to one of these types:
 
-* **Periodic Sensor**: sensores que dependem de um período de coleta fixo. Deve-se ter um tipo de dados específico (Definir os tipos de dados) e uma unidade de medida. Ex: sensor de temperatura que coleta dados de uma sala a cada 5 minutos.
-* **Actuator**: recebe um comando e altera o seu estado. Ele tem estados aceitáveis ou intervalo de valores. Ex: semáforo que possui três estados possíveis (Verde, amarelo e vermelho)
-* **Event-based**: somente registra um dado quando um determinado evento ocorre. Ex: sensor de presença, que somente registra um dado quando alguém está na sala.
-* **RFID**: NÃO CONTEMPLADO ATUALMENTE
+* **Periodic Sensor**: sensor that collect data in a fixed time period.
+Examples:
+  * A temperature sensor collecting data inside a room each 5 minutes
+  * A luminosity sensor collecting data in a public lamppost every 30 seconds
+* **Actuator**: receives a command to change its state. Each actuator
+capability has a set of acceptable states or a range of values. Examples:
+  * A traffic light has three possible states (green, yellow and red)
+  * An air conditioner can receive an command to change its temperature.
+  Possible values may vary within an acceptable temperature range.
+* **Event-based**: capabilities that generate data whenever a determined event
+happens. Example:
+  * A presence sensor that only register an event data when someone enters in
+  the monitored room
+  * A parking space that register whenever a car vacates a monitored parking
+  spot
+* **RFID**: *Not supported yet*
 
-## Attribute 
+## Attributes
 
-Atributos são tipos dados específicos que caracterizam um tipo de recurso. No geral, esses atributos não são modificados com frequência e nem a partir de eventos externos. Por exemplo, um vaga de estacionamento possui os seguintes atributos:
+Attributes are specific data that characterize a resource type. In most cases,
+these attributes are fixed, but can be updated. For example, a parking space
+may have the following attributes:
 
-* Número de Identificação dentro do estacionamento
-* Se é uma vaga prioritária
-* Horário de funcionamento 
-* Preço
-
-# Funcionalidades oferecidas pelo Resource Adaptor
-
-Tudo tem que ser oferecido através de uma API que utilize um protocolo de comunicação (ex: Rest) e uma representação de dados (ex: JSON)
-Nessa ideia nova, o Data Collector vai parar de ficar coletando os dados do Resource Adatpor e vai passar a receber notificações do Adaptor toda vez que um sensor gerar dado. Assim, o Resource Adaptor não teria um banco de dados normal, apenas um bando de dados em memória para guardar o último dado coletado, comando de atuadores e as relações de Pub/Sub criadas.
-
-API para os dispositivos: 
-
-* **Registrar um recurso**: primeiro passo para o recurso ficar disponível na plataforma. Ele gera um Token único para identificação desse recurso.
-* **Atualizar um recurso**: atualizar dados de um recurso já existente.
-* **Istanciar um recurso existente**: Autenticar que um recurso é ele mesmo através da chave. De outra forma, o recurso teria que se cadastrar novamente e o recurso antigo se perderia.
-* **Enviar dados coletados**: Informando a capacidade, tempo da coleta e o dado coletado. Essa API pode ser utilizada tanto para capacidades periódicas, quanto por capacidades que geram eventos
-* **Notificação de atuadores**: Tem que prover um PUB/SUB para que atuadores recebam notificações toda vez que surgir uma solicitação de mudança de estado.
-* **Função para verificar/atualizar o status de um recurso**
-* **Api para guardar atributos específicos**:  Provavelmente em uma estrutura NoSQL como o MongoDB
-
+* Parking identification number - *Integer*
+* Priority parking -  *Boolean*
+* Operating hours - *Time range*
+* Price - *Float* 
 
 
