@@ -51,7 +51,7 @@ and by specific information data ([Attributes](#attributes)).
 * Lat
 * Lon
 
-### Types of Capabilities
+### Capabilities
 
 Capabilities are functional part of a resource, defining resource's behavior.
 These capabilities belong to one of these types:
