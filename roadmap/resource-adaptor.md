@@ -39,8 +39,9 @@ The following figure highlight the main decisions of the proposal design.
 
 ### Resource Model
 
-Each resource is composed by general Meta-data (i.e.: type, latitude, 
-longitude), Capabilities (behavior), and by specific information data.
+Each resource is composed by general [Meta-data](#metadata)
+(i.e.: type, latitude, longitude), behavior ([Capabilities](#capabilities)),
+and by specific information data ([Attributes](#attributes)).
 
 ### Metadata
 
