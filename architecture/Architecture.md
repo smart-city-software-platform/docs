@@ -40,7 +40,7 @@ platform services supported by other protocols soon, such as Websocket.
 The following diagram presents a summarized overview of the development 
 services provided by the platform:
 
-![Platform development services](../images/platform_overview.png)
+![Platform development services](../images/architecture.png)
 > Icons from [Flaticon](http://www.flaticon.com/packs/urban-3) and by 
 [Madebyoliver](http://www.flaticon.com/authors/madebyoliver).
 
