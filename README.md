@@ -31,6 +31,7 @@ You can find the detailed project documentation in these links:
 * [Deployment](deployment/Deployment.md)
 * [Roadmap](roadmap/Roadmap.md)
 * [Contributing guidelines](contributing/Contributing.md)
+* [Applications](applications/applications.md)
 
 
 
