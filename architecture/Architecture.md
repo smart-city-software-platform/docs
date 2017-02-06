@@ -27,7 +27,7 @@ three key-enabling technologies: IoT, BigData and Cloud Computing. Such
 infrastructure must support cross-domain applications rather than 
 technological silos by sharing services, APIs, data, and standards.
 
-There are two kind of services provided by the platform:
+There are two kinds of services provided by the platform:
 
 * Front-end services: native platform services with graphical interfaces.
 Such services provide features to visualize data from city resources as well
@@ -44,12 +44,22 @@ services provided by the platform:
 > Icons from [Flaticon](http://www.flaticon.com/packs/urban-3) and by 
 [Madebyoliver](http://www.flaticon.com/authors/madebyoliver).
 
-Data Collector, Resource Discoverer and Actuator Controller services can be
-used by application developers to access city's resources, as denoted by
-**A**, **B** and **C** labeled arrows. The integration of new physical 
-resources may use the IoT Integration Services APIs. However, the communication
-represented by the **D** arrow must only be used for integration of new 
-resources to the platform, not for end-user application development.
+The Platform provides high-level RESTful services to support the development of
+smart city applications, services and tools for different purposes and domains.
+Currently, it is composed of **six** different microservices that provide
+features for the integration of IoT devices ( Resource Adaptor ), data
+and resource management ( Resource Catalog , Data Collector and Actuator
+Controller ), resource discovery through context data ( Resource Discovery )
+and visualization ( Resource Viewer )
+
+
+The platform intermediates all communication between smart city applications
+and IoT devices, as well as the complexity of city-scale data management.
+Specific IoT Gateways register city resources and post
+their sensorized data to the platform through the Resource Adaptor API. IoT
+Gateways may also subscribe to receive notifications to act over undelying
+actuator devices
+
 
 Next section describes in more detail the platform's **microservices
 architecture**, designed to provide the required features to support Smart
