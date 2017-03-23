@@ -1,7 +1,7 @@
-# Smart City Platform Architecture
+# InterSCity Platform Architecture
 
 This page presents an overview of the microservice architecture
-provided by the Smart City Software Platform.
+provided by the InterSCity Platform.
 
 ## Summary
 
@@ -19,23 +19,13 @@ provided by the Smart City Software Platform.
 ## Overview
 
 
-The project aims to provide high-level services to support 
+The project aims at providing high-level services to support 
 novel applications that interact with city's resources such as bus,
 street cameras, environmental sensors, and public open data. For this purpose,
 it works as an integrated, scalable software infrastructure gathering
 three key-enabling technologies: IoT, BigData and Cloud Computing. Such
 infrastructure must support cross-domain applications rather than 
 technological silos by sharing services, APIs, data, and standards.
-
-There are two kinds of services provided by the platform:
-
-* Front-end services: native platform services with graphical interfaces.
-Such services provide features to visualize data from city resources as well
-as meta-data for administrative purpose.
-* Development services: native platform services accessible through high-level
-APIs to support Smart Cities application, new services, and other development
-tools. While most services are based on REST protocol, we plan to add new
-platform services supported by other protocols soon, such as Websocket.
 
 The following diagram presents a summarized overview of the development 
 services provided by the platform:
@@ -66,45 +56,52 @@ Cities.
 
 ## Microservices view
 
-In order to properly provide an unified technological infrastructure to 
+In order to properly provide an unified technological infrastructure to
 city-scale services, the platform
-needs to integrate a large number of heterogeneous physical devices and 
-services. Thus, the platform is based on a scalable, distributed 
+needs to integrate a large number of heterogeneous physical devices and
+services. Thus, the platform is based on a scalable, distributed
 **microservices** architecture.
-To see the detailed relation of existing 
+To see the detailed relation of existing
 microservices, check the [Microservices
 documentation page](../microservices/Microservices.md)
-
-The following figure presents the platform's main services and how they
-communicate:
-
-![Platform's services architecture](../images/services_overview.png)
-> Icons from [Flaticon](http://www.flaticon.com/packs/urban-3)
 
 Microservices can communicate through their RESTful APIs or asynchronously 
 through [RabbitMQ message bus](https://www.rabbitmq.com/) with the
 [publish-subscribe design pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
-Communication between services are represented as directed arrows labeled by
-red circles:
+In particular, we vastly use the topic-based communication through RabbitMQ
+as explained [in this tutorial](https://www.rabbitmq.com/tutorials/tutorial-five-ruby.html)
+To demonstrate how the microservices communicate with each other,
+we present below the main scenarios of platform usage that trigger the
+execution of more than one platform service. In all diagrams, blue arrows
+represent asynchronous communication through AMQP, while red arrows represent
+HTTP-based communication through REST APIs.
 
-* **(A) Physical devices integration:** City's resources
+![Microservices communication on resource creation](../images/resource_creation.png)
+> Microservices communication on resource creation
+
+
+1. **Physical devices integration:** City's resources
 are coupled with cyber-physical devices, such as sensors and actuators, which
 may integrate to the platform by serveral different protocols. Thus, the
 *Resource Adaptor* is an unified endpoint service to which devices can register at the
 platform, send and request data. Every registered resource receives an 
 [UUID](https://tools.ietf.org/html/rfc4122). Checkout the supported protocols
-and technical details in the [Resource Adaptor page]().
-* **(B) Resource register:** In order to make a resource available on the
+and technical details in the [Resource Adaptor page](../microservices/resource-adaptor.md).
+1. **Resource register:** In order to make a resource available on the
 platform, *Resource Adaptor* sends the resource meta-data to *Resource
 Cataloguer* service through its REST API. These meta-data describes the main
 features of a resource, exposing its capabilities, location and other important
 information.
-* **(C) Resource creation notification:** After registering a new resource,
+1. **Resource creation notification:** After registering a new resource,
 the *Resource Cataloguer* publish an event to the
 [RabbitMQ message bus](https://www.rabbitmq.com/) which may notify the 
 *Data Collector* service if the resource has sensor capabilities. Similarly,
 the *Actuator Controller* service is notified whenever a new resource has
 actuator capabilities.
+
+
+TODO: CONTINUE HERE
+
 * **(D) [NOT IMPLEMENTED YET] Sending actuation requests to resources**: The *Actuator Controller*
 services is responsible to intermediate and register the actuation requests
 to city's resources. To send those requests, the *Actuator Controller*
