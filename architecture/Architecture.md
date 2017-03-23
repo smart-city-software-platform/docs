@@ -99,6 +99,19 @@ the *Resource Cataloguer* publish an event to the
 the *Actuator Controller* service is notified whenever a new resource has
 actuator capabilities.
 
+![Microservices communication on data stream](../images/data_stream.png)
+> Microservices communication on data stream
+
+1 **Collecting data from resources**: An IoT Gateway post new sensor data to
+the platform through the *Resource Adaptor* REST API. Then,
+the *Resource Adaptor* publishes a new event to RabbitMQ in the data\_stream
+topic.
+1. **Data stream notification**: Microservices interested in the most recent
+data provided by resources must subscribe to receive notifications.
+Currently, the *Data Collector* service stores all observed data in a
+historical database for futher processing. In a near future, we intented to:
+  * Implement the location update on *Resource Catalog*
+  * Implement a Big Data architecture for real time processing
 
 TODO: CONTINUE HERE
 
