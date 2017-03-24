@@ -8,12 +8,11 @@ provided by the InterSCity Platform.
 * [Overview](#overview)
 * [Microservices view](#microservices-view)
 * [Deployment view](#deployment-view)
-* [Design constraints and guidelines](#design-constraints-and-guidelines)
+* [Design principles](#design-principles)
 * [Security](#security)
 * [Roadmap](#roadmap)
   * [API](#api)
   * [Service discovery](#service-discovery)
-  * [Messaging](#messaging)
   * [API Gateway](#api-gateway)
 
 ## Overview
@@ -153,13 +152,38 @@ Both *Resource Discovery* and *Resource Viewer* request the *Resource Catalog*
 API to get static data about resources (3). They also request historical and
 real-time data to *Data Collector* microservice (4).
 
-TODO: CONTINUE HERE
-
 ## Deployment view
 
 > Comming soon
 
-## Design constraints and guidelines
+## Design principles
+
+* **Modularity via Services** -  Microservice architectures achieve
+modularity through single-purpose, small services that communicate
+through lightweight mechanisms to achieve a common goal.
+* **Distributed Models and Data** - With microservices, each service has its
+own database and models, which may evolve independently of external services.
+We encorage decentralized data management and the possibility to use different
+technologies that best fit each microservice context.
+* **Decentralized Evolution** - Microservices must be autonomous,
+providing well-defined boundaries and communication APIs so that they can
+evolve and be maintained independently. Moreover, this principle ensures
+that each service may implement its functionalities using the most appropriate
+technology, provoking positive technology heterogeneity. Each microservice
+may scale independently using different strategies. Finally, this design
+principle should reflect on the configuration and deployment procedures,
+which may be performed independently as well.
+* **Reuse of Open Source Projects** - We must always give preference to
+the use of existing robust open source tools, libraries, and frameworks
+instead of implementing components from scratch.
+* **Asynchronous versus Synchronous** - Although most services provide
+RESTful APIs, they must implement asynchronous messaging as much 
+as possible to avoid blocking in synchronous request-reply interactions.
+* **Stateless Services** - Microservices should be as stateless as possible
+to enable any service instance to respond to any request,
+facilitating load distribution and elasticity.
+Thus, the design of microservices should separate state data, such as context
+and session data, to be managed by an external component whenever possible.
 
 > Comming soon
 
@@ -196,17 +220,6 @@ system to support dynamic service discovery. These are some options:
 * [NSQ](http://nsq.io/)
 * [SERF by HashiCorp](https://www.serf.io/)
 * [SkyDNS](https://github.com/skynetservices/skydns)
-
-
-### Messaging
-
-Some of the synchronous communication between services may be redesigned to be
-support asynchronous messaging. These are some open source options:
-
-* [Mist](https://github.com/nanopack/mist)
-* [Apache Kafka](http://kafka.apache.org/)
-* [RabbitMQ](https://www.rabbitmq.com/)
-* [Mosquitto by Eclipse](https://mosquitto.org/)
 
 ### API Gateway
 
