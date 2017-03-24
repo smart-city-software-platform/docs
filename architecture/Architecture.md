@@ -76,8 +76,9 @@ execution of more than one platform service. In all diagrams, blue arrows
 represent asynchronous communication through AMQP, while red arrows represent
 HTTP-based communication through REST APIs.
 
+###  Microservices communication on resource creation
+
 ![Microservices communication on resource creation](../images/resource_creation.png)
-> Microservices communication on resource creation
 
 
 1. **Physical devices integration:** City's resources
@@ -99,10 +100,12 @@ the *Resource Cataloguer* publish an event to the
 the *Actuator Controller* service is notified whenever a new resource has
 actuator capabilities.
 
-![Microservices communication on data stream](../images/data_stream.png)
-> Microservices communication on data stream
+### Microservices communication on data stream
 
-1 **Collecting data from resources**: An IoT Gateway post new sensor data to
+![Microservices communication on data stream](../images/data_stream.png)
+
+
+1. **Collecting data from resources**: An IoT Gateway post new sensor data to
 the platform through the *Resource Adaptor* REST API. Then,
 the *Resource Adaptor* publishes a new event to RabbitMQ in the data\_stream
 topic.
@@ -113,30 +116,44 @@ historical database for futher processing. In a near future, we intented to:
   * Implement the location update on *Resource Catalog*
   * Implement a Big Data architecture for real time processing
 
-TODO: CONTINUE HERE
+### [Not Implemented] Microservices communication on resource actuation
 
-* **(D) [NOT IMPLEMENTED YET] Sending actuation requests to resources**: The *Actuator Controller*
-services is responsible to intermediate and register the actuation requests
-to city's resources. To send those requests, the *Actuator Controller*
-must publish a new actuation event to RabbitMQ, which may notify the 
-*Resource Adaptor* so that it can send the request to the proper device.
-* **(E) Collecting data from resources**: Whenever a resource post sensor data
-to the platform, the *Resource Adaptor* publishes a new event to RabbitMQ. Thus,
-the *Data Collector* services receives receives notifications about posting data
-events and store the data from resources.
-* **(F) Search for resources based on context data:** The 
-*Resource Discoverer* service provides a high-level API for Smart City 
-applications to query registered city's resources by context data. Currently,
-*Resource Discoverer* request the *Resource Cataloguer* for resource's 
-location and meta-data. It also uses the *Data Collector* to filter available
-resources based on sensors' data parameters.
-* **(G) Request for resources' details:** The *Resource Viewer* is a 
-visualization service that presents an overview of all city's resources. It 
-provides a Web front-end page which may be used both for real-time data 
-visualization and check resources administrative meta-data. *Resource Viewer*
-uses the *Resource Cataloguer* REST API to get the available resources and
-their meta-data. It also uses the *Data Collector* REST API to get the last
-data from specific resources with sensor capabilities.
+The actuation support is not working currently. We intend to support it
+in a near future, as described in
+[this issue](https://gitlab.com/smart-city-software-platform/resource-adaptor/issues/2)
+This architecture will probably work on MQTT or as a Web Hook.
+
+
+![Microservices communication on resource actuation](../images/actuation.png)
+
+
+1. An IoT Gateway subscribes to receive actuation commands for a specific
+resource (identified by its UUID).
+2. The *Resource Adaptor* forwards the subscription to the message broker
+RabbitMQ in *actuation* topic
+3. An external application may send commands to chage city resources state
+through actuation capabilities. Thus, it sends an actuation request to 
+*Actuator Controller* REST API
+4. The *Actuator Controller* publishes the request on RabbitMQ with *actuation*
+topic
+5. RabbitMQ notifies the *Resource Adaptor* with the command
+6. The *Resource Adaptor* fowards the notification to the IoT Gateway
+
+### Microservices communication on Resource Discovery and Visualization
+
+![Microservices communication on data stream](../images/resource_discovery_viewer.png)
+
+1. In order to discovery registered resources available on the city,
+client applications may query the *Resource Discovery* high-level API
+based on context-data, such as current status and location
+2. Platform Administrator users may use the *Resource Viewer* application
+to visualize the existing resources in the city
+
+Both *Resource Discovery* and *Resource Viewer* request the *Resource Catalog*
+API to get static data about resources (3). They also request historical and
+real-time data to *Data Collector* microservice (4).
+
+TODO: CONTINUE HERE
 
 ## Deployment view
 
