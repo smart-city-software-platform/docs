@@ -45,3 +45,7 @@ and evolvability.
 
 * Support other API standards to integrate and replicate smart city applications.
 For instance, support the APIs proposed by [CitySDK project](https://www.citysdk.eu/)
+
+# GIS
+
+* Introduce a specific microservice to provide Geolocation-based services. I.E.: [GeoServer](http://geoserver.org/)
