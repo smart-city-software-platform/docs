@@ -25,6 +25,14 @@ to present data related to city resources. However, several visualization
 techiniques can be tested and evaluated against Smart City requirements to
 present both historical, real-time, geolocalized, and static data.
 
+# Simulation
+
+* Provide simulation services integrated with the Platform, such as:
+** Integrate the [SCSimulator](https://github.com/ezambomsantana/smart-city-simulator)
+** Offer services to enable applications to setup simulations in order to operate the platform over simulated data, i.e:
+The simulator provide simulated observations from city which can be consumed by client applications through Data Collector API.
+In the meantime, applications could send actuation commands that would change the execution of the simulation
+
 # Real Applications
 
 * Several Smart City applications could be developed on the top of InterSCity.
