@@ -1,6 +1,7 @@
 # InterSCity - Smart City Software Platform
 
-The InterSCity platform is an open source project to technically support
+The [InterSCity platform](http://interscity.org/software/interscity-platform/) 
+is an open source project to technically support
 the development of Smart Cities projects. 
 It was created by the Smart City Research Group from the Institute of 
 Mathematics and Statistics - University of São Paulo in the
@@ -40,7 +41,21 @@ You can find the detailed project documentation in these links:
 
 # Contibuting
 
-> TODO
+There are several ways to contribute to this project as listed below:
+
+* Developing new features and/or solving microservices' open issues. For this
+purpose, you should try to run the platform in your local environment using
+the [Dev-env](https://gitlab.com/smart-city-software-platform/dev-env) repository.
+* Developing new features to the InterSCity platform ecosystem such as creating
+new services, libraries, or frameworks.
+* Developing new applications on the top of the InterSCity platform.
+* Conducting research in [related areas](research/opportunities.md).
+* Improving documentation or producing materials for teaching how to use the platform.
+
+In any case, you are invited to participate in our communication channels
+
+* [Email list](https://groups.google.com/forum/#!forum/interscity-platform): interscity-platform@googlegroups.com
+* IRC channel: freenode#interscity
 
 # License
 
